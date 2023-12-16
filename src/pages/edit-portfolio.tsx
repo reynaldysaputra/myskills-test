@@ -7,11 +7,14 @@ import { useEffect, useState } from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import { MdCloseFullscreen } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { resizeImage } from "../utils";
 
 function EditPortfolio() {
   const navigation = useNavigate();
   const [error, setError] = useState(false);
   const [numbOfPortfolioForms, setNumberOfPortfolioForms] = useState([1]);
+  const [fileHeroImg, setFileHeroImg] = useState<IFileImage>();
+  const [fileProfileImg, setFileProfileImg] = useState<IFileImage>();
   const [profileInput, setProfileInput] = useState<IProfile>({
     name: "",
     title: "",
@@ -24,8 +27,8 @@ function EditPortfolio() {
     tanggalMulai: "",
     tanggalSelesai: "",
     deskripsiPortfolio: "" 
-  }])
-
+  }]);
+  
   const onChange = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, indexs?: number) => {
     const {value, name} = e.currentTarget;
 
@@ -60,22 +63,48 @@ function EditPortfolio() {
     if(isFilled) {
       localStorage.setItem("data-profile", JSON.stringify(profileInput));
       localStorage.setItem("data-portfolio", JSON.stringify(portfolioInput));
+      localStorage.setItem('data-hero-img', JSON.stringify(fileHeroImg));
+      localStorage.setItem('data-profile-img', JSON.stringify(fileProfileImg));
       navigation("/");            
     }else {
       setError(true);
     }
   }
 
+  const getFileImage = (acceptedFiles: any, type: string) => {
+    var file = acceptedFiles[0]
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      resizeImage(event.target?.result, 1200, 1200).then(base64 => {        
+        const result:IFileImage = {
+          type,
+          pathImg: file.path,
+          base64Image: base64
+        }
+  
+        if(type === "bg-image"){
+          setFileHeroImg(result);
+        }else {
+          setFileProfileImg(result);
+        }
+      })
+    };
+    reader.readAsDataURL(file);
+  }
+
   useEffect(() => {
-    if(localStorage.getItem("data-profile") != null){
-      setProfileInput(JSON.parse(localStorage.getItem("data-profile")!));
-    }
-
-    if(localStorage.getItem("data-portfolio") != null) {
-      setPortfolioInput(JSON.parse(localStorage.getItem("data-portfolio")!));
+    if(
+      localStorage.getItem("data-profile") != null ||
+      localStorage.getItem("data-portfolio") != null ||
+      localStorage.getItem("data-profile-img") != null ||
+      localStorage.getItem("data-hero-img") != null 
+    ){
       setNumberOfPortfolioForms(JSON.parse(localStorage.getItem("data-portfolio")!));
+      setProfileInput(JSON.parse(localStorage.getItem("data-profile")!));
+      setPortfolioInput(JSON.parse(localStorage.getItem("data-portfolio")!));
+      setFileHeroImg(JSON.parse(localStorage.getItem("data-hero-img")!));
+      setFileProfileImg(JSON.parse(localStorage.getItem("data-profile-img")!));
     }
-
   }, [])
   
   return (
@@ -84,11 +113,17 @@ function EditPortfolio() {
         {/* Background Image */}
         <FileInput
           lable="Background Image"
+          maxFiles={1} // 5 gb
+          value={fileHeroImg?.pathImg}
+          onDrop={(e) => getFileImage(e, "bg-image")}
         />
 
         {/* Background Image */}
         <FileInput
           lable="Profile Image"
+          maxFiles={1} // 5 gb
+          value={fileProfileImg?.pathImg}
+          onDrop={(e) => getFileImage(e, "profile-image")}
         />
 
         {/* Profile Input */}
@@ -162,7 +197,7 @@ function EditPortfolio() {
 
         {/* Portfolio Input */}
         {numbOfPortfolioForms.map((item, index) => (
-          <section className="w-full mb-10" key={item}>
+          <section className="w-full mb-10" key={index}>
             <div className="flex justify-between items-center">
               <p className="decoration-solid underline">Portfolio {index + 1}</p>
               <div className="flex justify-center items-center">

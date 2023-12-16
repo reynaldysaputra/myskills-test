@@ -7,8 +7,14 @@ interface IPortfolio {
     deskripsiPortfolio: string 
   }[]
   
-  interface IProfile {
-    name: string,
-    title: string,
-    deskripsi: string
-  }
+interface IProfile {
+  name: string,
+  title: string,
+  deskripsi: string
+}
+
+interface IFileImage {
+  type: string,
+  pathImg: string,
+  base64Image: any
+}

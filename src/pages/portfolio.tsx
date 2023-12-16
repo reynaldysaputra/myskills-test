@@ -5,15 +5,15 @@ import { useState } from "react"
 function Portfolio() {
   const [dataProfile, _setDataProfile] = useState<IProfile>(JSON.parse(localStorage.getItem("data-profile")!));
   const [dataPortfolio, _setDataPortfolio] = useState<IPortfolio[]>(JSON.parse(localStorage.getItem("data-portfolio")!));
-
-  console.log(dataProfile.deskripsi)
+  const [dataHaroImage, _setDataHeroImage] = useState<IFileImage>(JSON.parse(localStorage.getItem("data-hero-img")!));
+  const [dataProfileImage, _setDataProfileImage] = useState<IFileImage>(JSON.parse(localStorage.getItem("data-profile-img")!));
 
   return (
     <>
       {/* Profile */}
       <Profile
-        heroImage="https://forumkamera.com/wp-content/uploads/2023/04/Teknik-Fotografi-Landscape.jpg"
-        profileImage="https://asset-a.grid.id/crop/0x0:798x407/945x630/photo/2018/09/13/1663191125.jpg"
+        heroImage={dataHaroImage?.base64Image}
+        profileImage={dataProfileImage?.base64Image}
         name={dataProfile.name}
         title={dataProfile.title}
         description={dataProfile.deskripsi}
@@ -22,9 +22,9 @@ function Portfolio() {
       {/* Porfolio */}
       <section className="w-[80%] mx-auto mt-10">
         <h2 className="text-lg font-bold mb-4">Portfolio</h2>
-        {dataPortfolio?.map(item => (
+        {dataPortfolio?.map((item, index) => (
           <PortfolioList
-            key={item.skils}
+            key={index}
             posisi={item.posisi}
             perusahaan={item.perusahaan}
             skils={item.skils}

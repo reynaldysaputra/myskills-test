@@ -18,7 +18,7 @@ export const Profile: React.FC<ProfileProps> = ({
       {/* Section Hero Image */}
       <img 
         src={heroImage}
-        className={`w-full h-[240px] md:h-[380px] object-cover object-center`}
+        className={`w-full h-[240px] md:h-[420px] object-cover object-center`}
       />
 
       {/* Section Profile */}

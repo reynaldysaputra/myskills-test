@@ -29,8 +29,12 @@ export const Profile: React.FC<ProfileProps> = ({
             className="w-[160px] h-[160px] rounded-full bg-cover"
           />
           <p className="text-lg	font-bold mt-5">{name}</p>
-          <p className="text-md text-[#878787] ">{title}</p>
-          <p className="text-sm text-center mt-2">{description}</p>
+          <p className="text-md text-[#878787] mb-2">{title}</p>
+          {
+            description.split("\n").map((item, index) => 
+              <p key={index} className="text-[#151B26] text-sm mt-1 self-start">{item}</p>
+            )
+          }
         </div>
       </section>
     </div>

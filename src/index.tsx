@@ -1,30 +1,24 @@
-import { Button } from "./components/button";
-import { FaPlus } from "react-icons/fa6";
-import { Routes, Route, useLocation } from "react-router-dom";
 import Layout from "./components/layout";
 import Portfolio from "./pages/portfolio";
 import EditPortfolio from "./pages/edit-portfolio";
+import { FaPlus } from "react-icons/fa6";
+import { Button } from "./components/button";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 function App() {
-  const location = useLocation();
-  const disabled = location.pathname === "/edit-portfolio" ? false: true;
+  const navigation = useNavigate();
 
   return(
     <>
-      <div className="w-full md:w-[75%] mx-auto mt-5 px-5 flex flex-row">
+      <div className="w-[90%] md:w-[80%] mx-auto mt-5">
         <Button
           name="Add Portfolio"
-          type="add-portfolio"
+          typeButton="add-portfolio"
           disabled={false}
           color="#10A4B0"
           Icon={FaPlus}
-        />
-        <Button
-          name="Simpan Perubahan"
-          type="simpan-perubahan"
-          disabled={disabled}
-          color={disabled ? "#919EAB3D" : "#10A4B0"}
-        />
+          onClick={() => navigation("edit-portfolio")}
+        />        
       </div>
 
         <Routes>

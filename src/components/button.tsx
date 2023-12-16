@@ -1,39 +1,38 @@
 import React from "react";
 import { IconType } from 'react-icons';
-import { useNavigate } from "react-router-dom";
 
-interface ButtonProps {
+interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   Icon?: IconType | string
   name: string,
-  type: "add-portfolio" | 'simpan-perubahan',
+  typeButton: "add-portfolio" | 'simpan-perubahan',
   color: string,
-  disabled: boolean
+  disabled?: boolean
 }
 
 export const Button: React.FC<ButtonProps> = ({ 
   Icon= "null", 
   name, 
-  type, 
+  typeButton, 
   color, 
-  disabled 
+  disabled,
+  ...rest 
 }) => {
   const addPortfolioStyle = `px-5 py-2 border-2 rounded-md text-xs sm:text-sm md:text-md duration-300 mr-3 items-center flex`;
   const simpanPerubahanStyle = `px-5 py-2 border-2 rounded-md text-xs sm:text-sm md:text-md items-center ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`;
-  const navigation = useNavigate();
 
   return(
     <button
-     className={type === "add-portfolio" ? addPortfolioStyle : simpanPerubahanStyle}
+     className={typeButton === "add-portfolio" ? addPortfolioStyle : simpanPerubahanStyle}
      style={{
       borderColor: color,
-      backgroundColor: type === 'simpan-perubahan' ? color : "",
-      color: type === 'simpan-perubahan' ? disabled ? color : "white" : color
+      backgroundColor: typeButton === 'simpan-perubahan' ? color : "",
+      color: typeButton === 'simpan-perubahan' ? disabled ? color : "white" : color
      }}
      disabled={disabled}
-     onClick={() => type === 'add-portfolio' ? navigation("edit-portfolio") : disabled ? null : navigation("/")}
+     {...rest}
     >
       {
-        type === 'add-portfolio' ? 
+        typeButton === 'add-portfolio' ? 
         <Icon size={24} style={{marginRight: '10'}} color={color} /> : 
         null
       }

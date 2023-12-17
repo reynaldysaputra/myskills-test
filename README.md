@@ -1,27 +1,15 @@
-# React + TypeScript + Vite
+Hi MySkills 👋
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+point 1 
+Berikut adalah cara untuk menjalankan dan menginstall aplikasi:
+1. clone project dari github menggunakan https atau download project ke local komputer anda
+2. setelah project berhasil dicloning, anda bisa membuka ke project root di terminal/cmd
+3. menginstall package dengan cara npm install / yarn install (jika anda menggunakan yarn)
+4. setelah berhasil menginstall package, anda bisa langsung menjalankan aplikasi menggunakan printah npm dev atau yarn dev di terminal/cmd
+5. selesai
 
-Currently, two official plugins are available:
+point 2
+schema untuk menyimpan data adalah menggunakan local storage, karena aplikasi ini tidak terlalu besar dan hanya menyimpan data2 yang kecil kecuali base64.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+point3 
+desain hampir sama dengan yang difigma, hanya saja ada beberapa tambahan desain sedikit karena tidak sesuai dengan flow yang dikirimkan.

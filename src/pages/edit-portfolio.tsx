@@ -1,13 +1,14 @@
-import FileInput from "../components/file-input"
+import FileInput from "../components/file-input";
 import Input from "../components/input";
 import TextArea from "../components/textarea";
-import { IoMdCloseCircleOutline } from "react-icons/io";
+import { toast } from 'react-toastify';
 import { Button } from "../components/button";
-import { useEffect, useState } from "react";
 import { FiPlusCircle } from "react-icons/fi";
-import { MdCloseFullscreen } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { resizeImage } from "../utils";
+import { useEffect, useState } from "react";
+import { MdCloseFullscreen } from "react-icons/md";
+import { IoMdCloseCircleOutline } from "react-icons/io";
 
 function EditPortfolio() {
   const navigation = useNavigate();
@@ -61,11 +62,25 @@ function EditPortfolio() {
     event.preventDefault();
 
     if(isFilled) {
+      toast.success(
+        localStorage.getItem("data-profile") === null ? 
+        "Data Portfolio Berhasil Dibuat 👍" : 
+        "Data Portfolio Berhasil Diperbarui 👏", 
+        {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        pauseOnHover: false,
+        closeOnClick: false,
+        progress: undefined,
+        theme: "light",
+      });  
+
       localStorage.setItem("data-profile", JSON.stringify(profileInput));
       localStorage.setItem("data-portfolio", JSON.stringify(portfolioInput));
       localStorage.setItem('data-hero-img', JSON.stringify(fileHeroImg));
       localStorage.setItem('data-profile-img', JSON.stringify(fileProfileImg));
-      navigation("/");            
+      navigation("/");       
     }else {
       setError(true);
     }

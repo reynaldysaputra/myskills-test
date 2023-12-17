@@ -14,25 +14,29 @@ function Portfolio() {
       <Profile
         heroImage={dataHaroImage?.base64Image}
         profileImage={dataProfileImage?.base64Image}
-        name={dataProfile.name}
-        title={dataProfile.title}
-        description={dataProfile.deskripsi}
+        name={dataProfile?.name}
+        title={dataProfile?.title}
+        description={dataProfile?.deskripsi}
       />
 
       {/* Porfolio */}
       <section className="w-[80%] mx-auto mt-10">
         <h2 className="text-lg font-bold mb-4">Portfolio</h2>
-        {dataPortfolio?.map((item, index) => (
-          <PortfolioList
-            key={index}
-            posisi={item.posisi}
-            perusahaan={item.perusahaan}
-            skils={item.skils}
-            dateStart={item.tanggalMulai}
-            dateEnd={item.tanggalSelesai}
-            description={item.deskripsiPortfolio}
-          />
-        ))}
+        {dataPortfolio == null || dataPortfolio == undefined ? (          
+          <h2 className="text-lg font-bold mb-4">No Portfolio...</h2>
+        ): (
+          dataPortfolio?.map((item, index) => (
+            <PortfolioList
+              key={index}
+              posisi={item.posisi}
+              perusahaan={item.perusahaan}
+              skils={item.skils}
+              dateStart={item.tanggalMulai}
+              dateEnd={item.tanggalSelesai}
+              description={item.deskripsiPortfolio}
+            />
+          ))
+        )}
       </section>
     </>
   )

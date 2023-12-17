@@ -76,7 +76,7 @@ export const FileInput:React.FC<FileInputProps> = ({
         </p>
         <img 
           src={base64Image}
-          className='w-[50%]' 
+          className='w-[30%]' 
           alt="image-preview" 
         />
       </Modal>

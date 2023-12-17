@@ -89,6 +89,7 @@ function EditPortfolio() {
   const getFileImage = (acceptedFiles: any, type: string) => {
     var file = acceptedFiles[0]
     const reader = new FileReader();
+
     reader.onload = (event) => {
       resizeImage(event.target?.result, 1200, 1200).then(base64 => {        
         const result:IFileImage = {
@@ -129,7 +130,8 @@ function EditPortfolio() {
         <FileInput
           lable="Background Image"
           maxFiles={1} // 5 gb
-          value={fileHeroImg?.pathImg}
+          base64Image={fileHeroImg?.base64Image}
+          pathImage={fileHeroImg?.pathImg}
           onDrop={(e) => getFileImage(e, "bg-image")}
         />
 
@@ -137,7 +139,8 @@ function EditPortfolio() {
         <FileInput
           lable="Profile Image"
           maxFiles={1} // 5 gb
-          value={fileProfileImg?.pathImg}
+          base64Image={fileProfileImg?.base64Image}
+          pathImage={fileProfileImg?.pathImg}
           onDrop={(e) => getFileImage(e, "profile-image")}
         />
 

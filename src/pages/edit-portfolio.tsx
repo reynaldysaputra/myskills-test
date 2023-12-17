@@ -66,7 +66,7 @@ function EditPortfolio() {
         localStorage.getItem("data-profile") === null ? 
         "Data Portfolio Berhasil Dibuat 👍" : 
         "Data Portfolio Berhasil Diperbarui 👏", 
-        {
+      {
         position: "bottom-left",
         autoClose: 5000,
         hideProgressBar: false,
